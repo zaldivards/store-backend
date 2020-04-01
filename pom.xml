@@ -66,6 +66,19 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${springfox-swagger-version}</version>
 		</dependency>
+		
+<!-- 		Dependencia para manejar xml en los endpoints -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		
+<!-- 		Sustituye a la implementacion StAX que viene por defecto en el jdk para manejar xml, woodstock es mas rapida -->
+		<dependency>
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>woodstox-core-asl</artifactId>
+			<version>4.4.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

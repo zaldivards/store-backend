@@ -65,8 +65,11 @@ class CustomerControllerTest {
 	final void findAll() throws Exception {
 
 		when(this.service.getAllCustomer()).thenReturn(List.of(new CustomerDTO(), new CustomerDTO()));
-		mvc.perform(get("/api/v1/customers").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$.customers", Matchers.hasSize(2)));
+		mvc.perform(get("/api/v1/customers").
+				contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.customers", Matchers.hasSize(2)));
 	}
 
 	@Test
@@ -75,7 +78,9 @@ class CustomerControllerTest {
 		dto.setFirstName(NAME);
 		dto.setLastName(LASTNAME);
 		when(this.service.getCustomer(Mockito.anyLong())).thenReturn(dto);
-		mvc.perform(get("/api/v1/customers/1").contentType(MediaType.APPLICATION_JSON))
+		mvc.perform(get("/api/v1/customers/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
 //		.andReturn().getResponse().getContentAsString();
 				.andExpect(status().isOk()).andExpect(jsonPath("$.lastName", is(LASTNAME)));
 	}
@@ -84,7 +89,8 @@ class CustomerControllerTest {
 	final void findByIdNotFound() throws Exception {
 		when(this.service.getCustomer(Mockito.anyLong())).thenThrow(ResourceNotFoundException.class);
 		mvc.perform(get(CustomerController.BASE_URL.concat("/23"))
-				.contentType(MediaType.APPLICATION_JSON))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 
 	}
@@ -95,7 +101,10 @@ class CustomerControllerTest {
 		dto.setFirstName(NAME);
 		dto.setLastName(LASTNAME);
 		when(this.service.createCustomer(Mockito.any(CustomerDTO.class))).thenReturn(dto);
-		mvc.perform(post("/api/v1/customers/").contentType(MediaType.APPLICATION_JSON).content(TestUtil.toJson(dto)))
+		mvc.perform(post("/api/v1/customers/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.toJson(dto))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is(NAME)));
 	}
 
@@ -113,7 +122,10 @@ class CustomerControllerTest {
 		dto.setFirstName(NAME);
 		dto.setLastName(LASTNAME);
 		when(this.service.updateCustomer(Mockito.anyLong(), Mockito.any(CustomerDTO.class))).thenReturn(dto);
-		mvc.perform(put("/api/v1/customers/1").contentType(MediaType.APPLICATION_JSON).content(TestUtil.toJson(dto)))
+		mvc.perform(put("/api/v1/customers/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.toJson(dto))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is(NAME)));
 	}
 

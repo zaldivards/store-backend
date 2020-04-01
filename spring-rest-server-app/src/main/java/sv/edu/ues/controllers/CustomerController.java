@@ -32,6 +32,8 @@ public class CustomerController {
 	}
 	
 	@ApiOperation(value = "Obtiene todos los clientes activos")
+	
+	//@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	@GetMapping
 	public CustomerListDTO getAllCustomers() {
 		return new CustomerListDTO(service.getAllCustomer());

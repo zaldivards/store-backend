@@ -53,7 +53,9 @@ class CategoryControllerTest {
 	@Test
 	final void findAll() throws Exception {
 		when(this.service.getAllCategories()).thenReturn(List.of(new CategoryDTO(), new CategoryDTO()));
-		mvc.perform(get("/api/v1/categories/").contentType(MediaType.APPLICATION_JSON))
+		mvc.perform(get("/api/v1/categories/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.categories", Matchers.hasSize(2)));
 		
@@ -65,7 +67,9 @@ class CategoryControllerTest {
 			CategoryDTO category = new CategoryDTO();
 			category.setName("TEST");
 			when(this.service.getCategoryByname(Mockito.anyString())).thenReturn(category);
-			mvc.perform(get("/api/v1/categories/some").contentType(MediaType.APPLICATION_JSON))
+			mvc.perform(get("/api/v1/categories/some")
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.name", is("TEST")));
 	}

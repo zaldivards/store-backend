@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import sv.edu.ues.domain.Customer;
 import sv.edu.ues.mapper.CustomerMapper;
@@ -31,8 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerDTO getCustomer(Long id) throws NotFoundException {
-		return this.repository.findById(id).map(mapper::customerToCustomerDTO).orElseThrow(RuntimeException::new);
+	public CustomerDTO getCustomer(Long id) throws ResourceNotFoundException{
+		return this.repository.findById(id).map(mapper::customerToCustomerDTO).orElseThrow(ResourceNotFoundException::new);
 	}
 
 	@Override
@@ -49,7 +48,8 @@ public class CustomerServiceImpl implements CustomerService {
 			if (dto.getLastName() != null) {
 				customer.setLastName(dto.getLastName());
 			}
-			return mapper.customerToCustomerDTO(customer);
+			
+			return mapper.customerToCustomerDTO(this.repository.save(customer));
 		}).orElseThrow(RuntimeException::new);
 	}
 

@@ -36,7 +36,9 @@ public class CustomerController {
 	//@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	@GetMapping
 	public CustomerListDTO getAllCustomers() {
-		return new CustomerListDTO(service.getAllCustomer());
+		CustomerListDTO listDTO = new CustomerListDTO();
+		listDTO.getCustomers().addAll(this.service.getAllCustomer());
+		return listDTO;
 	}
 	
 	@GetMapping("/{id}")

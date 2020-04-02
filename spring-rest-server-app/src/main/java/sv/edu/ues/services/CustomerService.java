@@ -4,6 +4,7 @@ import java.util.List;
 
 import sv.edu.ues.model.CustomerDTO;
 
+
 public interface CustomerService {
 
 	List<CustomerDTO> getAllCustomer();

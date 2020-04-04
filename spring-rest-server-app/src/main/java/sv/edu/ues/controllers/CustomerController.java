@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -45,6 +46,12 @@ public class CustomerController {
 	public CustomerDTO findById(@PathVariable Long id) throws NotFoundException {
 		return this.service.getCustomer(id);
 	}
+	
+	@GetMapping("/try")
+	public String testQueryParameter(@RequestParam String test) {
+		return "Se capto el parametro ".concat(test);
+	}
+	
 	@PostMapping
 	public CustomerDTO createCustomer(@RequestBody CustomerDTO dto) {
 		CustomerDTO savedDTO = this.service.createCustomer(dto);

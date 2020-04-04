@@ -2,8 +2,8 @@
   <xs:element name="CustomerListDTO" type="CustomerListDTO"/>
   <xs:complexType name="customerDTO">
     <xs:sequence>
-      <xs:element type="xs:string" name="firstName" minOccurs="0"/>
-      <xs:element type="xs:string" name="lastName" minOccurs="0"/>
+      <xs:element type="stringConstraint" name="firstName" minOccurs="0"/>
+      <xs:element type="stringConstraint" name="lastName" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CustomerListDTO">
@@ -11,4 +11,10 @@
       <xs:element type="customerDTO" name="customers" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
+   <xs:simpleType name="stringConstraint">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+            <xs:minLength value="3"></xs:minLength>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

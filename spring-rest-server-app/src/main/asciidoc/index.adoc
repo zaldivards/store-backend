@@ -1,0 +1,41 @@
+# Rest docs testing
+
+## Documentacion de los endpoints utilizando los testunit con asciidoctor
+
+### Get customer
+
+General request
+include::{snippets}/v1/customer/curl-request.adoc[]
+
+Path parameters:
+include::{snippets}/v1/customer/path-parameters.adoc[]
+
+Response body:
+include::{snippets}/v1/customer/response-body.adoc[]
+
+Response fields:
+include::{snippets}/v1/customer/response-fields.adoc[]
+
+# Post customer
+
+General request
+include::{snippets}/v1/customer-new/curl-request.adoc[]
+
+Request body
+include::{snippets}/v1/customer-new/request-body.adoc[]
+
+Request fields
+include::{snippets}/v1/customer-new/request-fields.adoc[]
+
+Response body:
+include::{snippets}/v1/customer-new/response-body.adoc[]
+
+Response fields:
+include::{snippets}/v1/customer-new/response-fields.adoc[]
+
+
+
+
+
+
+
